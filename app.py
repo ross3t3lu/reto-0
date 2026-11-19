@@ -136,10 +136,12 @@ def create_app(test_config=None):
                 action = request.form.get("action")
                 if action == "delete":
                     note_id = parse_note_id(request.form.get("note_id"))
-                    db.execute(
+                    cursor = db.execute(
                         "DELETE FROM notes WHERE id = ? AND user_id = ?",
                         (note_id, g.user["id"]),
                     )
+                    if cursor.rowcount == 0:
+                        abort(404)
                     flash("Nota eliminada.", "success")
                     return redirect(url_for("notes"))
                 if action != "save":

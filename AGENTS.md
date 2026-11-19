@@ -33,3 +33,5 @@ Cada cuenta solo puede ver y modificar sus propias notas.
 - No hacer commit ni push.
 
 ## Lecciones aprendidas
+- Al eliminar, editar o mostrar un registro, verificar siempre que pertenezca al usuario autenticado (`user_id` y `rowcount`) y devolver código `404` o `403` si no existe o es ajeno.
+
